@@ -36,4 +36,10 @@ public class ContaService {
 			throw new EntidadeNaoEncontrada("Conta de Id: " + idConta + ", não cadastrada!.");
 		}
 	}
+	
+	public ContaDto inserirConta(ContaDto contaDto) {
+		Conta conta = contaMap.toConta(contaDto);
+		conta = repository.save(conta);
+		return contaMap.toModel(conta);
+	}
 }

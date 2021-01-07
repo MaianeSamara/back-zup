@@ -24,4 +24,8 @@ public class ContaMap {
 	public ContaDto toModel(Conta conta) {
 		return modelMapper.map(conta, ContaDto.class);
 	}
+	
+	public Conta toConta(ContaDto conta) {
+		return modelMapper.map(conta, Conta.class);
+	}
 }
