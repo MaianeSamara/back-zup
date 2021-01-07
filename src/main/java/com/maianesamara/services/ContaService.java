@@ -3,6 +3,7 @@ package com.maianesamara.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.maianesamara.dto.ContaDto;
@@ -26,5 +27,13 @@ public class ContaService {
 	
 	public Conta buscarContaId(Long idConta) {
 		return repository.findById(idConta).orElseThrow(() -> new EntidadeNaoEncontrada("Conta de Id: " + idConta + ", não cadastrada!."));
+	}
+	
+	public void deletarConta(Long idConta) {
+		try {
+			repository.deleteById(idConta);
+		}catch (EmptyResultDataAccessException e) {
+			throw new EntidadeNaoEncontrada("Conta de Id: " + idConta + ", não cadastrada!.");
+		}
 	}
 }

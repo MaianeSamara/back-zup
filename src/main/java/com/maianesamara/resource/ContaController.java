@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,6 +36,12 @@ public class ContaController {
 		Conta conta = service.buscarContaId(idConta);
 		ContaDto contaDto = contaMap.toModel(conta);
 		return ResponseEntity.ok().body(contaDto);
+	}
+	
+	@DeleteMapping(value = "/{idConta}")
+	public ResponseEntity<Void> deletarConta(@PathVariable Long idConta){
+		service.deletarConta(idConta);
+		return ResponseEntity.noContent().build();
 	}
 }
 
