@@ -64,5 +64,12 @@ public class ContaController {
 		contaDto = service.inserirConta(contaDtoAtualização);
 		return ResponseEntity.ok().body(contaDto);	
 	}
+	
+	@DeleteMapping
+	public ResponseEntity<Void> deletarTodos() {
+		service.deletarTodos();
+		return ResponseEntity.noContent().build();
+	}
+	
 }
 

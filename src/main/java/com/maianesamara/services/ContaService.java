@@ -42,4 +42,8 @@ public class ContaService {
 		conta = repository.save(conta);
 		return contaMap.toModel(conta);
 	}
+	
+	public void deletarTodos() {
+		repository.deleteAll();
+	}
 }
