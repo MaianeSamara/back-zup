@@ -3,6 +3,8 @@ package com.maianesamara.resource;
 import java.net.URI;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -51,14 +53,14 @@ public class ContaController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<ContaDto> inserirConta(@RequestBody ContaDto contaDto){
+	public ResponseEntity<ContaDto> inserirConta(@Valid @RequestBody ContaDto contaDto){
 		contaDto = service.inserirConta(contaDto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(contaDto.getId()).toUri();
 		return ResponseEntity.created(uri).body(contaDto);
 	}
 	
 	@PutMapping(value = "/{idConta}")
-	public ResponseEntity<ContaDto> atualizarConta(@PathVariable Long idConta, @RequestBody ContaDto contaDto){
+	public ResponseEntity<ContaDto> atualizarConta(@Valid @PathVariable Long idConta, @RequestBody ContaDto contaDto){
 		ContaDto contaDtoAtualização = contaMap.toModel(service.buscarContaId(idConta));
 		BeanUtils.copyProperties(contaDto, contaDtoAtualização , "id", "dataNascimento");
 		contaDto = service.inserirConta(contaDtoAtualização);
