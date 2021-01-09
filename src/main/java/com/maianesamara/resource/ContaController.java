@@ -23,6 +23,9 @@ import com.maianesamara.entidade.Conta;
 import com.maianesamara.map.ContaMap;
 import com.maianesamara.services.ContaService;
 
+import io.swagger.annotations.Api;
+
+@Api(tags = "Contas")
 @RestController
 @RequestMapping(value = "/contas")
 public class ContaController {
